@@ -129,7 +129,7 @@
     {
         "game": "Ananta",
         "shorthand": "ant",
-        "color": "#008AFC",
+        "color": "#FF1E8A",
         "versions": [
             { "version": 1.0, "phaseOne": "2027-01-15" }
         ]
@@ -137,7 +137,7 @@
     {
         "game": "Silver Palace",
         "shorthand": "sp",
-        "color": "#816D97",
+        "color": "#7F00FF",
         "versions": [
             { "version": 1.0, "phaseOne": "2026-12-14" }
         ]
@@ -145,7 +145,7 @@
     {
         "game": "Holidays",
         "shorthand": "hol",
-        "color": "#800020",
+        "color": "#DC143C",
         "dates": [
             { "date": "2026-01-01", "name": "New Year's Day" },
             { "date": "2026-02-01", "name": "Thaipusam" },
