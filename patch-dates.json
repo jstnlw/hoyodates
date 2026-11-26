@@ -127,19 +127,19 @@
         ]
     },
     {
-        "game": "Silver Palace",
-        "shorthand": "sp",
-        "color": "#816D97",
-        "versions": [
-            { "version": 1.0, "phaseOne": "2026-12-14" }
-        ]
-    },
-    {
         "game": "Ananta",
         "shorthand": "ant",
         "color": "#008AFC",
         "versions": [
             { "version": 1.0, "phaseOne": "2027-01-15" }
+        ]
+    },
+    {
+        "game": "Silver Palace",
+        "shorthand": "sp",
+        "color": "#816D97",
+        "versions": [
+            { "version": 1.0, "phaseOne": "2026-12-14" }
         ]
     },
     {
