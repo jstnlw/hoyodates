@@ -13,7 +13,7 @@ const DEFAULT_INTERVAL = 42;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 const STORAGE_KEY = "gachaverse_toggles";
-const DATA_URL = "highlight-dates.json";
+const DATA_URL = "patch-dates.json";
 const SITE_TITLE_PREFIX = "Gachaverse";
 const MOBILE_BREAKPOINT = 480;
 
@@ -331,7 +331,8 @@ class CalendarManager {
 		const btn = document.createElement("button");
 		btn.className = `toggle-${game.shorthand.toLowerCase()}`;
 		btn.dataset.game = game.shorthand;
-		btn.setAttribute("aria-label", `Toggle ${game.game} events`);
+		btn.setAttribute("aria-label", `${game.game}`);
+		btn.title = game.game;
 		btn.classList.toggle("inactive", !isActive);
 
 		this.setupToggleHandler(btn, game.shorthand);

@@ -2,7 +2,7 @@
 
 A lightweight, dependency free calendar built with plain HTML, CSS, and JavaScript for tracking gacha game patch schedules, banner phases, livestream dates, and public holidays.
 
-The calendar is driven by `highlight-dates.json`, so most yearly maintenance can be done without changing the JavaScript.
+The calendar is driven by `patch-dates.json`, so most yearly maintenance can be done without changing the JavaScript.
 
 ## Features
 
@@ -11,10 +11,6 @@ The calendar is driven by `highlight-dates.json`, so most yearly maintenance can
 - Generates all 12 months for the current year.
 - Weeks start on Monday.
 - Automatically marks today's date.
-- Responsive month grid:
-  - Desktop: 4 columns.
-  - Tablet: 3 columns.
-  - Mobile: 2 columns.
 - On mobile, automatically scrolls to the current month after loading.
 - Updates the document title, title meta tag, and footer with the current year.
 
@@ -23,12 +19,6 @@ The calendar is driven by `highlight-dates.json`, so most yearly maintenance can
 When any configured game or holiday contains a date beyond the current year, the calendar automatically adds a preview of the next year below the current calendar.
 
 A full width year heading separates the two years.
-
-The preview displays:
-
-- Desktop: January to April.
-- Tablet: January to March.
-- Mobile: January to February.
 
 The feature is controlled by:
 
@@ -164,7 +154,7 @@ Calendar dates can display contextual tooltips.
 Example:
 
 ```text
-HSR Patch v4.7
+ABC Patch v4.7
 ```
 
 ### Livestream
@@ -172,7 +162,7 @@ HSR Patch v4.7
 Example:
 
 ```text
-HSR Livestream v4.7
+ABC Livestream v4.7
 ```
 
 ### Holiday
@@ -180,7 +170,7 @@ HSR Livestream v4.7
 Example:
 
 ```text
-Chinese New Year
+New Year's Day
 ```
 
 ### Today
@@ -190,7 +180,7 @@ Hovering today's date also displays the closest upcoming patch among currently e
 Example:
 
 ```text
-HSR v4.8 in 12 days
+ABC v4.8 in 12 days
 ```
 
 If multiple games share the same nearest patch date, they are shown together.
@@ -217,15 +207,12 @@ Holidays use the same ISO date format:
     "shorthand": "hol",
     "color": "#aa0000",
     "dates": [
-        { "date": "2027-01-01", "name": "New Year's Day" },
-        { "date": "2027-02-01", "name": "Federal Territory Day" }
+        { "date": "2027-01-01", "name": "New Year's Day" }
     ]
 }
 ```
 
 Holiday entries are always visible and are not controlled by a game toggle.
-
-The current data includes Kuala Lumpur public holidays.
 
 ## JSON configuration
 
@@ -233,8 +220,8 @@ The current data includes Kuala Lumpur public holidays.
 
 ```json
 {
-    "game": "HonkaiStarRail",
-    "shorthand": "hsr",
+    "game": "ExampleGame",
+    "shorthand": "abc",
     "color": "#33ccff",
     "autoInterval": 41,
     "toggle": true,
@@ -276,10 +263,7 @@ The current data includes Kuala Lumpur public holidays.
 Each active game expects a WebP icon using its shorthand:
 
 ```text
-assets/hsr-icon.webp
-assets/zzz-icon.webp
-assets/ww-icon.webp
-assets/end-icon.webp
+assets/abc-icon.webp
 ```
 
 The JavaScript preloads these icons and dynamically creates the matching toggle CSS.
@@ -324,16 +308,6 @@ The calendar uses CSS Grid.
 
 The JavaScript always generates up to four preview months. CSS hides the excess preview months at smaller breakpoints, so resizing does not require rebuilding the calendar.
 
-## Reduced motion
-
-The stylesheet respects:
-
-```css
-@media (prefers-reduced-motion: reduce)
-```
-
-Transitions on toggles, calendar days, and phase highlights are disabled when the user requests reduced motion.
-
 ## Important constants
 
 Most global behavior can be changed near the top of `main.js`:
@@ -341,7 +315,7 @@ Most global behavior can be changed near the top of `main.js`:
 ```js
 const CURRENT_YEAR = new Date().getFullYear();
 const DEFAULT_INTERVAL = 42;
-const DATA_URL = "highlight-dates.json";
+const DATA_URL = "patch-dates.json";
 const SITE_TITLE_PREFIX = "Gachaverse";
 const MOBILE_BREAKPOINT = 480;
 const NEXT_YEAR_PREVIEW = true;
@@ -376,19 +350,16 @@ Maximum number of next year months generated before responsive CSS hides extras.
 .
 ├── index.html
 ├── main.js
-├── highlight-dates.json
+├── patch-dates.json
 └── assets/
     ├── favicon.ico
     ├── favicon-256.ico
-    ├── hsr-icon.webp
-    ├── zzz-icon.webp
-    ├── ww-icon.webp
-    └── end-icon.webp
+    └── abc-icon.webp
 ```
 
 ## Running locally
 
-Because `main.js` loads `highlight-dates.json` with `fetch()`, serve the project over HTTP instead of opening `index.html` directly with a `file://` URL.
+Because `main.js` loads `patch-dates.json` with `fetch()`, serve the project over HTTP instead of opening `index.html` directly with a `file://` URL.
 
 For example, with Python installed:
 
@@ -406,7 +377,7 @@ Any basic static file server will work.
 
 ## Adding a game
 
-1. Add a game object to `highlight-dates.json`.
+1. Add a game object to `patch-dates.json`.
 2. Give it a unique lowercase `shorthand`.
 3. Add at least one version with `version` and `phaseOne`.
 4. Add `phaseTwo` when that patch has a known second phase.
@@ -422,8 +393,8 @@ The project is intended to be manually refreshed each year.
 
 Recommended yearly update:
 
-1. Update confirmed versions and dates in `highlight-dates.json`.
-2. Add the new year's Kuala Lumpur holidays.
+1. Update confirmed versions and dates in `patch-dates.json`.
+2. Add the new year's holidays.
 3. Remove historical data you no longer need.
 4. Keep at least the latest patch needed to seed auto interval generation.
 5. Check games with unusual patch lengths and set `autoInterval` if needed.
@@ -435,7 +406,7 @@ Auto generated versions are convenience estimates. Confirmed schedules should be
 
 - No frameworks or third party JavaScript dependencies are required.
 - The application is entirely client side.
-- `highlight-dates.json` is the primary maintenance file.
+- `patch-dates.json` is the primary maintenance file.
 - Patch version auto generation increments versions by `0.1`.
 - The current format intentionally does not use a `lastMinor` rollover setting. If a game's real version numbering jumps differently, update the confirmed JSON entries during normal maintenance.
 - Patch and phase schedules can change. Confirmed game schedules should take priority over auto generated estimates.
